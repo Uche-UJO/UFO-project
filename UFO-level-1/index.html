@@ -12,3 +12,80 @@
 
 <div id='stars'></div>
 <div id='stars2'></div>
+
+<body>
+  <div class="wrapper">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="index.html">UFO Sightings
+            <img class="nav-ufo" src="static/images/Ricardo-UFO.svg">
+          </a>
+        </div>
+      </div>
+    </nav>
+    <div class="hero text-center">
+      <h1 style="font-family: 'Michroma', sans-serif; text-shadow: 1px 1px 2px black, 0 0 25px whitesmoke, 0 0 5px #618D1B;">UFO Sightings</h1>
+      <p style="color: #618D1B; text-shadow: 1px 1px 2px black, 0 0 25px whitesmoke, 0 0 5px #618D1B; font-size: 30px;">The Truth is Out There</p>
+    </div>
+    <div class="container">
+      <div class="row margin-top-50">
+        <div class="col-md-2">
+          <aside class="filters">
+            <div class="panel panel-default">
+              <div class="panel-heading" style="font-family: 'Michroma', sans-serif;">Filter Search</div>
+              <div class="panel-body">
+                <form>
+                  <div class="form-group">
+
+                    <ul class="list-group" id="filters">
+                      <li class="filter list-group-item" style="background-color: black;">
+                        <label for="date">Enter a Date</label>
+                        <input class="form-control" id="datetime" type="text" placeholder="1/11/2010">
+                      </li>
+                      <li class="filter list-group-item" style="background-color: black;">
+                        <label for="date">Enter a City</label>
+                        <input class="form-control" id="city" type="text" placeholder="benton">
+                      </li>
+
+                    </ul>
+                  </div>
+                  <button id="filter-btn" type="button" class="btn btn-default">Filter Table</button>
+                  <button id="reset-btn" type="reset" class="btn btn-default">Reset Table</button>
+                </form>
+
+              </div>
+            </div>
+          </aside>
+        </div>
+        <div class="col-md-10">
+          <div id="table-area" class="">
+            <table id="ufo-table" class="table table-striped">
+              <thead>
+                <tr>
+                  <th class="table-head">Date</th>
+                  <th class="table-head">City</th>
+                  <th class="table-head">State</th>
+                  <th class="table-head">Country</th>
+                  <th class="table-head">Shape</th>
+                  <th class="table-head">Duration</th>
+                  <th class="table-head">Comments</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <span class="bottom" style="font-family: 'Michroma', sans-serif;">UFO Sightings</span>
+      <div class="footer">Copyright &copy; Uche Obianyimuo, May 2020</div>
+    </footer>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js"></script>
+  <script src="static/js/data.js"></script>
+  <script src="static/js/app.js"></script>
+</body>
+
+</html>
