@@ -1,4 +1,4 @@
-// Variables
+// Declare variables
 var button = d3.select("#filter-btn");
 var inputField1 = d3.select("#datetime");
 var inputField2 = d3.select("#city");
@@ -23,6 +23,7 @@ button.on("click", () => {
   d3.event.preventDefault();
   var inputDate = inputField1.property("value").trim();
   var inputCity = inputField2.property("value").toLowerCase().trim();
+
   // Filter by field matching input value
   var filterDate = data.filter(data => data.datetime === inputDate);
   console.log(filterDate)
@@ -31,7 +32,7 @@ button.on("click", () => {
   var filterData = data.filter(data => data.datetime === inputDate && data.city === inputCity);
   console.log(filterData)
 
-  // Add filtered sighting to table
+  // Add filtered sightings to table
   tbody.html("");
 
   let response = {
