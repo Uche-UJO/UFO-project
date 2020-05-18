@@ -1,68 +1,57 @@
-// from data.js
-var tableData = data;
+// Variables
+var button = d3.select("#filter-btn");
+var inputField1 = d3.select("#datetime");
+var inputField2 = d3.select("#city");
+var tbody = d3.select("tbody");
+var resetbtn = d3.select("#reset-btn");
+var columns = ["datetime", "city", "state", "country", "shape", "durationMinutes", "comments"]
 
-console.log('tableData:', tableData);
+var populate = (dataInput) => {
 
-// Target the table body
-var tableBody = d3.select('tbody');
-
-console.log('tableBody:', tableBody);
-
-function buildTable(someData){
-  // clear the table
-  tableBody.html("");
-  // Append rows to the table body
-  someData.forEach(row => {
-
-    // Add a row to the table body
-    var tableRow = tableBody.append('tr');
-
-    // loop through the row (dictionary) and grab all of the values
-    var rowValues = Object.values(row);
-
-    // console.log('rowValues:', rowValues);
-
-    rowValues.forEach(value => {
-      var tableCell = tableRow.append('td');
-      tableCell.text(value);
-    });
+  dataInput.forEach(ufo_sightings => {
+    var row = tbody.append("tr");
+    columns.forEach(column => row.append("td").text(ufo_sightings[column])
+    )
   });
 }
-buildTable(tableData);
 
-function rebuildTable(){
-  buildTable(tableData);
-}
+//Populate table
+populate(data);
 
-var filter_button = d3.select("#filter-btn");
-var reset_button = d3.select("#reset-btn");
+// Filter by attribute
+button.on("click", () => {
+  d3.event.preventDefault();
+  var inputDate = inputField1.property("value").trim();
+  var inputCity = inputField2.property("value").toLowerCase().trim();
+  // Filter by field matching input value
+  var filterDate = data.filter(data => data.datetime === inputDate);
+  console.log(filterDate)
+  var filterCity = data.filter(data => data.city === inputCity);
+  console.log(filterCity)
+  var filterData = data.filter(data => data.datetime === inputDate && data.city === inputCity);
+  console.log(filterData)
 
-function handleClick(){
+  // Add filtered sighting to table
+  tbody.html("");
 
-    let date_filter = d3.select("#datetime").property('value');
+  let response = {
+    filterData, filterCity, filterDate
+  }
 
-    let city_filter = d3.select("#city").property('value');
-    let state_filter = d3.select("#state").property('value');
-    let country_filter = d3.select("#country").property('value');
-    let shape_filter = d3.select("#shape").property('value');
-    d3.select("#datetime").node().value = "";
-    d3.select("#city").node().value = "";
-    d3.select("#state").node().value = "";
-    d3.select("#country").node().value = "";
-    d3.select("#shape").node().value = "";
+  if (response.filterData.length !== 0) {
+    populate(filterData);
+  }
+    else if (response.filterData.length === 0 && ((response.filterCity.length !== 0 || response.filterDate.length !== 0))){
+      populate(filterCity) || populate(filterDate);
   
+    }
+    else {
+      tbody.append("tr").append("td").text("No results found!"); 
+    }
+})
 
-  var filtered = tableData.filter(item =>{
-
-    return (!date_filter || (item.datetime === date_filter))&&
-           (!city_filter || (item.city === city_filter)) &&
-           (!state_filter || (item.state === state_filter)) &&
-           (!country_filter || (item.country === country_filter)) &&
-           (!shape_filter || (item.shape === shape_filter));
-  });
-
-  buildTable(filtered);
-}
-
-filter_button.on("click", handleClick);
-reset_button.on("click", rebuildTable);
+resetbtn.on("click", () => {
+  tbody.html("");
+  populate(data)
+  console.log("Table reset")
+})
