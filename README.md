@@ -1,7 +1,7 @@
 ## UFO-project 
 
 ### Problem
-###### Build an interative web application to help users quickly query ufo-sightings data based on different input conditions and then return a data table. 
+###### Build an interative web application to help users quickly query ufo-sightings data (UFO-level-1/static/js-folder/data.js) based on different input conditions and then return a data table. 
 
 ### Process
 ###### Create a basic HTML web page and design it with CSS and Bootstrap.
